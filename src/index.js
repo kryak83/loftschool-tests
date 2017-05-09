@@ -41,8 +41,8 @@ function returnArgumentsArray() {
 
  Функция должна принимать другую функцию и возвращать результат вызова переданной функции
  */
-function returnFnResult(fn) {
-}
+function returnFnResult(Fn){
+  }
 
 /*
  Задание 5:
