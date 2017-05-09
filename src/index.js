@@ -15,7 +15,7 @@ var result;
  if(array.length == 0){throw new Error('empty array');};
  for(var i=0,j=0;i<array.length;i++)
  {
-   if(fn(array[i]){ j++;}
+   if(fn(array[i])){ j++;}
  }
  if (j==array.length){result=true};
  return result;
