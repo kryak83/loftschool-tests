@@ -41,11 +41,8 @@ function returnArgumentsArray() {
 
  Функция должна принимать другую функцию и возвращать результат вызова переданной функции
  */
-function returnFnResult(Fn){
-var a=5,b=7;
-function Fn(){
-return (a+b);};
-var zero=Fn();
+function returnFnResult(fn){
+var zero=fn();
 return zero; 
 
   }
