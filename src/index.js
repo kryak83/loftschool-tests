@@ -6,7 +6,7 @@
  Функция должна принимать один аргумент и возвращать его
  */
 function returnFirstArgument(arg) {
-}
+ return arg;}
 
 /*
  Задание 2:
@@ -15,6 +15,8 @@ function returnFirstArgument(arg) {
  Значение по умолчанию второго аргумента должно быть 100
  */
 function defaultParameterValue(a, b) {
+b=b||100;
+return (a+b);
 }
 
 /*
@@ -24,7 +26,8 @@ function defaultParameterValue(a, b) {
  Количество переданных аргументов заранее неизвестно
  */
 function returnArgumentsArray() {
-}
+var rez=arguments;
+return rez;}
 
 /*
  Задание 4:
@@ -41,6 +44,8 @@ function returnFnResult(fn) {
  При вызове F, переданное число должно быть увеличено на единицу и возвращено из F
  */
 function returnCounter(number) {
+number=number||0;
+return function F(){return ++number};
 }
 
 /*
