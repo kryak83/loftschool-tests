@@ -32,7 +32,7 @@ function returnArgumentsArray() {
 }
   
   
-  return arguments;
+  return res;
 }
 
 
