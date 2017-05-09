@@ -26,6 +26,18 @@ return (a+b);
  Количество переданных аргументов заранее неизвестно
  */
 function returnArgumentsArray() {
+var rez=array();
+if(arguments.length!=0){
+for (var i = 0; i < arguments.length; i++) {
+    rez[i]=arguments[i] );
+  };} else rez=[];
+  return rez;
+}
+
+
+
+
+
 var rez=arguments;
 return rez;}
 
