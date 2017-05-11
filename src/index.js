@@ -10,26 +10,27 @@
  Зарпещено использовать встроенные методы для работы с массивами
  */
 function isAllTrue(array, fn) {
-try{
-	var res;
-if (!(typeof fn =="function")){throw new Error("fn is not a function");}
-if (!(array instanceof Array)){throw new Error{"empty array");}
-if (array.length == 0){throw new Error("empty array");}
 
+	var res;
+if ((typeof array !== 'object') || array.length == 0) {
+        throw new Error('empty array');
+if (!(typeof fn ==="function")){throw new Error("fn is not a function");}
+//if ((array.length === 0)||(!(typeof array =="object")){throw new Error("empty array");}
+//if (array.length === 0){throw new Error("empty array");}
+
+    }
 	 
  for(var i=0;i<array.length;i++)
 	 
  {res=fn(array[i]);
-  if (!res){return false} 
-	 
-	 
-	 }
-
- }
-
+  if (!res){return false;}
+  };
 return true;
+
+
+}
  
- }
+ 
 
 /*
  Задача 2:
@@ -41,6 +42,21 @@ return true;
  Зарпещено использовать встроенные методы для работы с массивами
  */
 function isSomeTrue(array, fn) {
+	var res;
+if ((typeof array !== 'object') || array.length == 0) {
+        throw new Error('empty array');
+if (!(typeof fn ==="function")){throw new Error("fn is not a function");}
+
+
+    }
+	 
+ for(var i=0;i<array.length;i++)
+	 
+ {res=fn(array[i]);
+  if (res){return true;}
+  };
+
+	
 }
 
 /*
@@ -52,6 +68,18 @@ function isSomeTrue(array, fn) {
  - fn не является функцией (с текстом "fn is not a function")
  */
 function returnBadArguments(fn) {
+	var res=[];var funk;var args=[];var temp;
+	if (!(typeof fn ==="function")){throw new Error("fn is not a function");}
+	if (arguments.length==1){return res;}
+	for(var i=1;i<arguments.length;i++){
+		try {res[i]=arguments[i];
+		temp=res[i];
+		funk=fn(temp); 
+		}
+		catch(e){args.push(temp);}
+		}
+		return args;
+		
 }
 
 /*
@@ -68,7 +96,38 @@ function returnBadArguments(fn) {
  - number не является числом (с текстом "number is not a number")
  - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
-function calculator() {
+function calculator(number=0) {
+	    //var number=arguments[0];
+		if (!(typeof number ==="number")){throw new Error("number is not a number");}
+		number=number||0;
+		var myobj={
+		 sum:function()
+				{for(var i=0;i<arguments.length;i++)
+					{number=number+arguments[i];}
+				return number;},
+		 dif:function(){
+				for(var i=0;i<arguments.length;i++)
+					{number=number-arguments[i];}
+				return number;},
+		 div:function(){
+				for(var i=0;i<arguments.length;i++)
+					{    
+				       	if (arguments[i]==0)
+								   { throw new Error('division by 0');}
+				       
+					}
+				for(var i=0;i<arguments.length;i++)
+				{number=number/arguments[i];}
+		             return number;
+			},
+		 mul:function(){
+				for(var i=0;i<arguments.length;i++)
+				{number=number*arguments[i];}
+				return number;}
+			
+		
+};
+return myobj;
 }
 
 export {
