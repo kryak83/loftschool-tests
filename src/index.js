@@ -12,21 +12,21 @@
 function isAllTrue(array, fn) {
 try{
 	var res;
-if (!(typeof fn =="function")){throw "fn is not a function";}
-if (!(array instanceof Array)){throw "empty array";}
-if (array.length == 0){throw "empty array";}
+if (!(typeof fn =="function")){throw new Error("fn is not a function");}
+if (!(array instanceof Array)){throw new Error{"empty array");}
+if (array.length == 0){throw new Error("empty array");}
 
 	 
  for(var i=0;i<array.length;i++)
 	 
  {res=fn(array[i]);
-  if (!res){throw new Error();} 
+  if (!res){return false} 
 	 
 	 
 	 }
 
  }
-catch (e){if (e.name=="Error") return false;};
+
 return true;
  
  }
