@@ -12,9 +12,9 @@
 function isAllTrue(array, fn) {
 try{
 	var res;
-if (!(typeof fn =="function")){throw new "fn is not a function"};
-if (!(array instanceof Array)){throw new "empty array"};
-if (!(array.length > 0)){throw new "empty array"};
+if (!(typeof fn =="function")){throw new Error();};
+if (!(array instanceof Array)){throw new Error();};
+if (array.length == 0){throw new Error();};
 
 	 
  for(var i=0;i<array.length;i++)
