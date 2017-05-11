@@ -10,16 +10,19 @@
  Зарпещено использовать встроенные методы для работы с массивами
  */
 function isAllTrue(array, fn) {
-var result;
- if(!(typeof fn == 'function')){throw new Error('fn is not a function');};
- if(array.length == 0){throw new Error('empty array');};
- for(var i=0,j=0;i<array.length;i++)
- {
-   if(fn(array[i])){ j++;}
+
+var res;
+ for(var i=0;i<array.length;i++)
+ try{
+	 if (!(typeof fn =="function")){throw new "fn is not a function"};
+	 if (!(array instanceof Array)){throw new "empty array"};
+	 if (!(array.length > 0)){throw new "empty array"};
+ {res=fn(array[i]);
+  if (!res){throw new Error();} 
  }
- if (j==array.length){result=true};
- return result;
-}
+}catch (e){if (e.name=="Error") return false;}
+ 
+ }
 
 /*
  Задача 2:
