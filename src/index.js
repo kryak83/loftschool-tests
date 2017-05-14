@@ -5,6 +5,10 @@
  Напишите аналог встроенного метода forEach для работы с массивами
  */
 function forEach(array, fn) {
+for(var i=0;i<array.length;i++)
+{
+fn(array[i],i,array);
+}
 }
 
 /*
@@ -12,6 +16,12 @@ function forEach(array, fn) {
  Напишите аналог встроенного метода map для работы с массивами
  */
 function map(array, fn) {
+var result=[];
+for(var i=0;i<array.length;i++)
+{
+result[i]=fn(array[i],i,array);
+}
+return result;
 }
 
 /*
@@ -19,6 +29,14 @@ function map(array, fn) {
  Напишите аналог встроенного метода reduce для работы с массивами
  */
 function reduce(array, fn, initial) {
+var current;var prev;
+if (typeof initial==="undefined"){prev=array[0];} else {prev=initial;}
+for(var i=0;i<array.length;i++)
+{
+current=fn(prev,array[i],i,array);
+prev=current;
+}
+return current;
 }
 
 /*
