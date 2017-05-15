@@ -30,12 +30,22 @@ return result;
  */
 function reduce(array, fn, initial) {
 var current;var prev;
-if (typeof initial==="undefined"){prev=array[0];} else {prev=initial;}
+if (!initial){prev=array[0];
+
+for(var i=1;i<array.length;i++)
+{
+current=fn(prev,array[i],i,array);
+prev=current;
+}
+} 
+else {prev=initial;
 for(var i=0;i<array.length;i++)
 {
 current=fn(prev,array[i],i,array);
 prev=current;
 }
+}
+
 return current;
 }
 
@@ -45,6 +55,10 @@ return current;
  Функция должна удалить указанное свойство из указанного объекта
  */
 function deleteProperty(obj, prop) {
+if( prop in obj){
+delete obj[prop]; return true;
+} else return false;
+
 }
 
 /*
@@ -53,6 +67,9 @@ function deleteProperty(obj, prop) {
  Функция должна проверить существует ли укзаанное свойство в указанном объекте
  */
 function hasProperty(obj, prop) {
+if (prop in obj){
+return true;} 
+else return false;
 }
 
 /*
@@ -60,6 +77,12 @@ function hasProperty(obj, prop) {
  Функция должна получить все перечисляемые свойства объекта и вернуть их в виде массива
  */
 function getEnumProps(obj) {
+var props=[];
+for( var key in obj)
+{
+props.push(key);
+}
+return props;
 }
 
 /*
@@ -67,6 +90,14 @@ function getEnumProps(obj) {
  Функция должна перебрать все свойства объекта, преобразовать их имена в верхний регистра и вернуть в виде массива
  */
 function upperProps(obj) {
+var props=[];var nameProp;
+for( var key in obj)
+{
+nameProp=key.toUpperCase();
+props.push(nameProp);
+}
+return props;
+
 }
 
 /*
@@ -74,6 +105,48 @@ function upperProps(obj) {
  Напишите аналог встроенного метода slice для работы с массивами
  */
 function slice(array, from, to) {
+var result=[];
+if(arguments.length == 1){return array;}
+if(!to){to=(array.length);};
+try
+	{ 
+			if(to>=0)
+			{      
+					if(from >= 0){  
+						   if (from > to){throw new Error();};
+						   for (var i=from;i<to;i++)
+						   {result.push(array[i]);}
+						   return result;} 
+					else {//from <0
+							if ((array.length+from) > to){throw new Error();};
+							for (var i=array.length+from;i<to;i++)
+							{result.push(array[i]);}
+							return result;
+						  }
+			}
+
+			else 
+			{
+					if(from >= 0) 
+					{
+							 if(from > (array.length+to)){throw new Error();};
+							 for (var i=from;i<array.length+to;i++)
+							  {result.push(array[i]);}
+							  return result;
+					} 
+					else 
+					{
+							if((arr.length+from) > (arr.length+to)){throw new Error();};
+							for (var i=(arr.length+from);i<arr.length+to;i++)
+							{
+								result.push(arr[i]);}
+								
+								return result;
+						
+					}
+			}
+	}
+catch(e){console.log("Введите корректные значения");}
 }
 
 /*
