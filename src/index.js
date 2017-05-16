@@ -105,49 +105,20 @@ return props;
  Напишите аналог встроенного метода slice для работы с массивами
  */
 function slice(array, from, to) {
-var result=[];
-if(arguments.length == 1){return array;}
-if(!to){to=(array.length);};
-try
-	{ 
-			if(to>=0)
-			{      
-					if(from >= 0){  
-						   if (from > to){throw new Error();};
-						   for (var i=from;i<to;i++)
+var result=[];	
+if(typeof from =="undefined"){from=0;}	
+if(typeof to =="undefined"){to=array.length;};
+if (to < 0) {to = array.length + to;};
+if(to>array.length){to=array.length;};
+if (from < 0) {from = array.length + from;};
+if (from < 0) {from = 0;};
+    
+for (var i=from;i<to;i++)
 						   {result.push(array[i]);}
 						   return result;} 
-					else {//from <0
-							if ((array.length+from) > to){throw new Error();};
-							for (var i=array.length+from;i<to;i++)
-							{result.push(array[i]);}
-							return result;
-						  }
-			}
+	
+	
 
-			else 
-			{
-					if(from >= 0) 
-					{
-							 if(from > (array.length+to)){throw new Error();};
-							 for (var i=from;i<array.length+to;i++)
-							  {result.push(array[i]);}
-							  return result;
-					} 
-					else 
-					{
-							if((arr.length+from) > (arr.length+to)){throw new Error();};
-							for (var i=(arr.length+from);i<arr.length+to;i++)
-							{
-								result.push(arr[i]);}
-								
-								return result;
-						
-					}
-			}
-	}
-catch(e){console.log("Введите корректные значения");}
-}
 
 /*
  Задача 9 *:
@@ -155,7 +126,15 @@ catch(e){console.log("Введите корректные значения");}
  Proxy должен перехватывать все попытки записи значений свойств и возводить это значение в квадрат
  */
 function createProxy(obj) {
-}
+
+    var prox=new Proxy(obj,{
+		set(obj,prop,value){
+			return value=obj.prop*obj.prop;
+		}
+	})
+    return prox;
+
+     }
 
 export {
     forEach,
