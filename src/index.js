@@ -129,10 +129,11 @@ function createProxy(obj) {
 
     var prox=new Proxy(obj,{
 		set(obj,prop,value){
-			return value=obj.prop*obj.prop;
+			obj[prop]=value*value;
+			return true;
 		}
-	})
-    return prox;
+	});
+   return prox;
 
      }
 
