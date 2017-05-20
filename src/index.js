@@ -59,15 +59,17 @@ function prepend(what, where) {
  * т.к. следующим соседом этих элементов является элемент с тегом P
  */
 function findAllPSiblings(where) {
-	var arr=[];
-	var ch=document.getElementsByTagName("where");
-		for(var i=0;i<ch[0].children.length;i++)
-		{
-			/*if(ch[0].children[i].nextElementSibling.tagName =="p")
-			{arr[i]=ch[0].children[i].tagName;}*/
-		    
-		}
-		return arr;
+	
+    var arr = [];
+
+    for(var i = 0; i < where.children.length - 1; ++i){
+        if(where.children[i].nextElementSibling.tagName == 'P'){
+            arr.push(where.children[i]);
+        }
+    }
+    
+    return arr;
+
 }
 
 /**
@@ -81,8 +83,8 @@ function findAllPSiblings(where) {
 function findError(where) {
     var result = [];
 
-    for (var i = 0; i < where.childNodes.length; i++) {
-        result.push(where.childNodes[i].innerText);
+    for (var i = 0; i < where.children.length; i++) {
+        result.push(where.children[i].innerText);
     }
 
     return result;
@@ -102,6 +104,11 @@ function findError(where) {
  * должно быть преобразовано в <div></div><p></p>
  */
 function deleteTextNodes(where) {
+     for (var i = 0; i < where.childNodes.length; i++) {
+	  if(where.childNodes[i].nodeType == 3)
+	  {where.removeChild(where.childNodes[i]);}
+	 }
+	 return true;
 }
 
 /**
@@ -115,6 +122,14 @@ function deleteTextNodes(where) {
  * должно быть преобразовано в <span><div><b></b></div><p></p></span>
  */
 function deleteTextNodesRecursive(where) {
+    for (var i = 0; i < where.childNodes.length; ++i) {
+        if (where.childNodes[i].nodeType == 3) {
+            where.removeChild(where.childNodes[i]);
+            i--;
+        } else if (where.childNodes[i].nodeType == 1) {
+            deleteTextNodesRecursive(where.childNodes[i]);
+        }
+    }
 }
 
 /**
@@ -140,6 +155,17 @@ function deleteTextNodesRecursive(where) {
  * }
  */
 function collectDOMStat(root) {
+var myobj={};var txtcount;var tags=[];
+for(var i=0;i<root.childNodes.length;i++){
+if (root.childNodes[i].nodeType == 3)
+{txtcount++; i--;
+ } 
+else if (root.childNodes[i].nodeType == 1)
+{collectDOMStat(root.childNodes[i]);
+tags.push(root.childNodes[i].tagName);}
+}
+myobj.texts=txtcount;
+return myobj;
 }
 
 /**
