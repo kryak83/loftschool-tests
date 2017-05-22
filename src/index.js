@@ -155,17 +155,32 @@ function deleteTextNodesRecursive(where) {
  * }
  */
 function collectDOMStat(root) {
-var myobj={};var txtcount;var tags=[];
-for(var i=0;i<root.childNodes.length;i++){
-if (root.childNodes[i].nodeType == 3)
-{txtcount++; i--;
- } 
-else if (root.childNodes[i].nodeType == 1)
-{collectDOMStat(root.childNodes[i]);
-tags.push(root.childNodes[i].tagName);}
-}
-myobj.texts=txtcount;
-return myobj;
+var myobj = {
+        tags: {},
+        classes: {},
+        texts: 0
+    };
+    function TagsElement(elem) {
+        if (myobj.tags.hasOwnProperty(elem.tagName)) {myobj.tags[elem.tagName]++;}
+		else {myobj.tags[elem.tagName] = 1;}
+    }
+    function ClassElement(elem) {
+        for (var i = 0; i < elem.classList.length; i++) {
+            if(myobj.classes.hasOwnProperty(elem.classList[i])) {myobj.classes[elem.classList[i]]++;}
+			else {myobj.classes[elem.classList[i]] = 1;}
+        }
+    }
+    function CreateObject(elem) {
+        for (var i = 0; i < elem.childNodes.length; i++) {
+            if (elem.childNodes[i].nodeType == 3) {myobj.texts=myobj.texts+1;}
+			else  {TagsElement(elem.childNodes[i]);
+					ClassElement(elem.childNodes[i]);
+					CreateObject(elem.childNodes[i]);
+            }
+        }
+    }
+    CreateObject(root);
+    return myobj;
 }
 
 /**
