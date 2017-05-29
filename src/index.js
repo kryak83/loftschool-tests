@@ -65,7 +65,17 @@ return function F(){return ++number};
  Функция должна привязать переданные аргументы к функции F и вернуть получившуюся функцию
  */
 function bindFunction(fn) {
-}
+var arg=[];
+ for( var i=1;i<arguments.length;i++)
+ {
+	arg.push(arguments[i]);
+ }
+
+  return fn.bind(null,...arg);}
+
+  
+
+
 
 export {
     returnFirstArgument,
